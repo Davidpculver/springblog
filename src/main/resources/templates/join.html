@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Join</title>
+</head>
+<body>
+
+<!--Connected to the helloController join method. used pizza for reference-->
+<h1 th:text="${pizza}"></h1>
+
+<form action="/join" method="post">
+    <input type="text" name="cohort" id="cohort-ip" class="field" />
+    <button>Join now</button>
+</form>
+
+</body>
+</html>

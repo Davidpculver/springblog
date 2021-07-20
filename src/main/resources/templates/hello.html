@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Greetings</title>
+</head>
+<body>
+<!--name coming from the helloController using Spring-->
+<!--If no name is passed, can use placeholder "world".-->
+<!--th is similar to c-out-->
+<h1>Hello, <span th:text="${name}">World</span></h1>
+</body>
+</html>
