@@ -6,7 +6,17 @@
 </head>
 <body>
 <ul th:each="park: ${parks}">
-    <li th:text="${park.name}"></li>
+    <!--    if statement not only evaluate to a boolean-->
+    <!--    if parks object is not null, the block code will run-->
+    <th:block th:if="${parks}">
+        <li th:text="${park.name}"></li>
+    </th:block>
+
+<!--    th:unless checks for the opposite. Parks is not empty, so code runs-->
+<!--    <th:block th:unless="${parks.isEmpty()}">-->
+<!--        <li th:text="${park.name}"></li>-->
+<!--    </th:block>-->
+
 </ul>
 </body>
 </html>
