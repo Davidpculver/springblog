@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Post index</title>
+</head>
+<body>
+<h1>Here are all the posts</h1>
+
+<ul th:each="post: ${posts}">
+    <th:block>
+        <li th:text="${post.title}"></li>
+        <li th:text="${post.body}"></li>
+    </th:block>
+
+</ul>
+</body>
+</html>

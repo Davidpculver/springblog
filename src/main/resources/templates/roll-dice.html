@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Dice Game</title>
+    <th:block th:replace="partials/styles.html :: styles"></th:block>
 </head>
 <body>
-<h1>Welcome to the dice game! Can you guess the correct number?</h1>
+    <nav th:replace="partials/navbar :: navbar"></nav>
+    <h1>Welcome to the dice game! Can you guess the correct number?</h1>
 
-<ul>
-    <li><a href="http://localhost:8080/roll-dice/1">1</a></li>
-    <li><a href="http://localhost:8080/roll-dice/2">2</a></li>
-    <li><a href="http://localhost:8080/roll-dice/3">3</a></li>
-    <li><a href="http://localhost:8080/roll-dice/4">4</a></li>
-    <li><a href="http://localhost:8080/roll-dice/5">5</a></li>
-    <li><a href="http://localhost:8080/roll-dice/6">6</a></li>
-</ul>
+    <ul>
+        <li><a href="http://localhost:8080/roll-dice/1">1</a></li>
+        <li><a href="http://localhost:8080/roll-dice/2">2</a></li>
+        <li><a href="http://localhost:8080/roll-dice/3">3</a></li>
+        <li><a href="http://localhost:8080/roll-dice/4">4</a></li>
+        <li><a href="http://localhost:8080/roll-dice/5">5</a></li>
+        <li><a href="http://localhost:8080/roll-dice/6">6</a></li>
+    </ul>
 
-<h2><span th:text="${n}"></span></h2>
-<h2><span th:text="${randomNumber}"></span></h2>
-<h2 th:text="${result}"></h2>
+    <h2><span th:text="${n}"></span></h2>
+    <h2><span th:text="${randomNumber}"></span></h2>
+    <h2 th:text="${result}"></h2>
 
 </body>
 </html>

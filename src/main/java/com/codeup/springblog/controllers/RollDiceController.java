@@ -47,4 +47,23 @@ public class RollDiceController {
         }
         return "roll-dice";
     }
+
+
+    //    INSTRUCTOR EXAMPLE
+//    @GetMapping("/roll-dice")
+//    public String guess() {
+//        return "guess";
+//    }
+//
+//    @GetMapping("/roll-dice/{n}")
+//    public String checkGuess(@PathVariable int n, Model model){
+//        int randomNumber = (int) Math.floor((Math.random() * 6) + 1);
+//        boolean check = randomNumber == n;
+//        model.addAttribute("n", n);
+//        model.addAttribute("randomNumber", randomNumber);
+//        model.addAttribute("check", check);
+//        return "dice-roll-check";
+//    }
+
+
 }
