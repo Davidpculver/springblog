@@ -40,29 +40,28 @@ public class PostController {
     List<Post> posts = new ArrayList<>();
 
 
-        @GetMapping("/index")
-        public String showPosts(Model model){
-            Post post1 = new Post("Post 1", "This is the first post.");
-            Post post2 = new Post("Post 2", "This is the second post.");
+    @GetMapping("/index")
+    public String showPosts(Model model) {
+        Post post1 = new Post("Post 1", "This is the first post.");
+        Post post2 = new Post("Post 2", "This is the second post.");
 
 
+        posts.add(post1);
+        posts.add(post2);
 
-            posts.add(post1);
-            posts.add(post2);
+        model.addAttribute("posts", posts);
 
-            model.addAttribute("posts", posts);
-
-            return "posts/index";
-        }
+        return "posts/index";
+    }
 
 
-//        For individual post
+    //        For individual post
     @GetMapping("/posts/{id}")
-    public String viewIndividualPosts(@PathVariable long id, Model model){
+    public String viewIndividualPosts(@PathVariable long id, Model model) {
         Post post = new Post("Mailman bites dog", "Dog is suing the city for treats.");
         model.addAttribute("post", post);
         return "posts/show";
     }
 
 
-    }
+}
