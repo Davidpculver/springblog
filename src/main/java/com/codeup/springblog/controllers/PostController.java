@@ -2,6 +2,7 @@ package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Park;
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Controller
 public class PostController {
+
 //    @GetMapping("/posts")
 //    @ResponseBody
 //    public String postIndexPage(){
@@ -37,30 +39,69 @@ public class PostController {
 //    }
 
 
-    List<Post> posts = new ArrayList<>();
+//    List<Post> posts = new ArrayList<>();
+//
+//
+//    @GetMapping("/index")
+//    public String showPosts(Model model) {
+//        Post post1 = new Post("Post 1", "This is the first post.");
+//        Post post2 = new Post("Post 2", "This is the second post.");
+//
+//
+//        posts.add(post1);
+//        posts.add(post2);
+//
+//        model.addAttribute("posts", posts);
+//
+//        return "posts/index";
+//    }
+//
+//
+//    //        For individual post
+//    @GetMapping("/posts/{id}")
+//    public String viewIndividualPosts(@PathVariable long id, Model model) {
+//        Post post = new Post("Mailman bites dog", "Dog is suing the city for treats.");
+//        model.addAttribute("post", post);
+//        return "posts/show";
+//    }
 
+    private final PostRepository postRepo;
 
-    @GetMapping("/index")
-    public String showPosts(Model model) {
-        Post post1 = new Post("Post 1", "This is the first post.");
-        Post post2 = new Post("Post 2", "This is the second post.");
+    public PostController(PostRepository postRepo) {
+        this.postRepo = postRepo;
+    }
 
-
-        posts.add(post1);
-        posts.add(post2);
-
-        model.addAttribute("posts", posts);
-
+    @GetMapping("/posts")
+    public String index(Model model) {
+        model.addAttribute("posts", postRepo.findAll());
         return "posts/index";
     }
 
-
-    //        For individual post
-    @GetMapping("/posts/{id}")
-    public String viewIndividualPosts(@PathVariable long id, Model model) {
-        Post post = new Post("Mailman bites dog", "Dog is suing the city for treats.");
-        model.addAttribute("post", post);
+    @GetMapping("/posts/{n}")
+    public String findById(@PathVariable long n, Model model) {
+        model.addAttribute("post", postRepo.findById(n));
         return "posts/show";
+    }
+
+    @PostMapping("/posts/delete/{id}")
+    public String deleteById(@PathVariable long id) {
+        postRepo.deleteById(id);
+        return "redirect:/posts";
+    }
+
+    @PostMapping("/posts/edit/{id}")
+    public String postToEdit(@PathVariable long id, Model model) {
+        model.addAttribute("post", postRepo.findById(id));
+        return "posts/edit";
+    }
+
+    @PostMapping("/posts/edit/update/{id}")
+    public String editPost(@PathVariable long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
+        Post updatedPost = postRepo.getById(id);
+        updatedPost.setTitle(title);
+        updatedPost.setBody(body);
+        postRepo.save(updatedPost);
+        return "redirect:/posts";
     }
 
 

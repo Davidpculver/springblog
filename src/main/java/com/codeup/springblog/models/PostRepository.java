@@ -1,18 +1,17 @@
 package com.codeup.springblog.models;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-public interface PostRepository extends JpaRepository<Ad, Long> {
-    @Query("FROM Ad a WHERE a.id = ?1")
+public interface PostRepository extends JpaRepository<Post, Long> {
 
-    Ad findById(long id);
+    Post findById(long id);
 
+    void deleteById(long id);
 
-    @Query("FROM Ad a WHERE a.title like %:term%")
-
-
-    Ad findByTitle(String term);
-
-
+//    Post editById(@PathVariable long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body);
 }
