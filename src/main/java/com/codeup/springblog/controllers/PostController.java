@@ -86,17 +86,19 @@ public class PostController {
     @PostMapping("/posts/delete/{id}")
     public String deleteById(@PathVariable long id) {
         postRepo.deleteById(id);
+//        Instructor:
+//        postRepo.delete(id);
         return "redirect:/posts";
     }
 
-    @PostMapping("/posts/edit/{id}")
+    @GetMapping("/posts/edit/{id}")
     public String postToEdit(@PathVariable long id, Model model) {
         model.addAttribute("post", postRepo.findById(id));
         return "posts/edit";
     }
 
     @PostMapping("/posts/edit/update/{id}")
-    public String editPost(@PathVariable long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
+    public String editPost(@PathVariable long id, @RequestParam String title, @RequestParam String body) {
         Post updatedPost = postRepo.getById(id);
         updatedPost.setTitle(title);
         updatedPost.setBody(body);

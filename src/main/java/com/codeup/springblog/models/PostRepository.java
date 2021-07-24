@@ -13,5 +13,4 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     void deleteById(long id);
 
-//    Post editById(@PathVariable long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body);
 }

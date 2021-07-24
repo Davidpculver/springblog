@@ -11,11 +11,12 @@
     <th:block>
         <li th:text="${post.title}"></li>
         <li th:text="${post.body}"></li>
+<!--        Create delete button: grabs the post id inside the mapping-->
         <form th:action="@{/posts/delete/{id}(id=${post.id})}" method="POST">
-            <!--            <input hidden th:value="${post.id}">-->
             <button type="submit">Delete</button>
         </form>
-        <form th:action="@{/posts/edit/{id}(id=${post.id})}" method="POST">
+<!--Dollar sign denotes a model value. {} is just a "variable"-->
+        <form th:action="@{/posts/edit/{id}(id=${post.id})}" method="GET">
             <input hidden th:value="${post.title}" name="title">
             <input hidden th:value="${post.body}" name="body">
             <button type="submit">Edit</button>
