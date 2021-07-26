@@ -9,5 +9,9 @@
 <h1>Here is the single ad</h1>
 <p><span th:text="${ad.title}"></span></p>
 <p><span th:text="${ad.description}"></span></p>
+<div th:each="cat : ${ad.categories}">
+    <span th:text="${cat.name}"></span>
+</div>
+<div><span th:text="${ad.user.email}"></span></div>
 </body>
 </html>

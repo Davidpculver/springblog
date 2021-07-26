@@ -1,7 +1,5 @@
 package com.codeup.springblog.models;
 
-import com.codeup.springblog.models;
-import com.codeup.springblog.models.Ad;
 import javax.persistence.*;
 @Entity
 @Table(name = "ad_images")
@@ -9,14 +7,19 @@ public class AdImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Column(nullable = false)
+
     private String path;
+
     public AdImage() {
     }
+
     public AdImage(long id, String path) {
         this.id = id;
         this.path = path;
     }
+
     public long getId() {
         return id;
     }

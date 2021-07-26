@@ -11,6 +11,11 @@
     <th:block>
         <li th:text="${ad.title}"></li>
         <li th:text="${ad.description}"></li>
+        <li th:text="${ad.user.username}"></li>
+<!--        prints out each category-->
+        <li th:each="cat : ${ad.categories}">
+            <span th:text="${cat.name}"></span>
+        </li>
     </th:block>
 
 </ul>

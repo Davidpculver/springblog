@@ -62,6 +62,8 @@ package com.codeup.springblog.models;
 //}
 
 import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Table(name="ads")
 public class Ad {
@@ -72,9 +74,12 @@ public class Ad {
     private String title;
     @Column(nullable = false)
     private String description;
+
+    //    establishing to image
     @OneToOne
-//    establishing to image
     private AdImage adImage;
+
+
     public Ad(){}
 
 //    connecting to user - joincolumn binds their relationship together, ad an extra column to the table the represents user included
@@ -82,12 +87,24 @@ public class Ad {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Ad(long id, String title, String description, AdImage adImage, User user) {
+//    establish the join table for categories and ads. Similar to the connecting manager/employees table inside the employees db. A single ad can point to many different ads.
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "ads_categories",
+            joinColumns = {@JoinColumn(name = "ad_id")},
+            inverseJoinColumns = {@JoinColumn(name = "category_id")}
+    )
+
+    private List<Category> categories;
+
+
+    public Ad(long id, String title, String description, AdImage adImage, User user, List<Category> categories) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.adImage = adImage;
         this.user = user;
+        this.categories = categories;
     }
 
     public long getId() {
@@ -121,5 +138,13 @@ public class Ad {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 }
