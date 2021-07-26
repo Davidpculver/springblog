@@ -13,7 +13,7 @@
         <li th:text="${post.body}"></li>
 <!--        Create delete button: grabs the post id inside the mapping-->
         <form th:action="@{/posts/delete/{id}(id=${post.id})}" method="POST">
-            <button type="submit">Delete</button>
+            <button type="submit">Delete Post</button>
         </form>
 <!--Dollar sign denotes a model value. {} is just a "variable"-->
         <form th:action="@{/posts/edit/{id}(id=${post.id})}" method="GET">
