@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+<!--@ for links-->
+<!--$ points to our variable from the model attribute-->
+<form th:action="@{/ads/create}" th:method="post" th:object="${ad}">
+    Title:
+<!--    the * referred to field withing the object in the form-->
+<!--    prepopulate by using the th:value-->
+    <input th:field="*{title}" th:value="*{title}"/>
+    <br />
+    Description:
+    <textarea th:field="*{description}"></textarea>
+    <br />
+    <input type="submit" />
+</form>
+
+</body>
+</html>

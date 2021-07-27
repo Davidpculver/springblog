@@ -15,13 +15,14 @@
 <!--</form>-->
 
 <!--REFACTORING for Form Model Binding-->
-<form th:action="@{/posts/edit/update/{id}(id=${post.id})}" th:method="POST" th:object="${updatedPost}">
+<form th:action="@{/posts/edit/update/{id}(id=${id})}" th:method="POST" th:object="${post}">
     <label for="title">Edit your title</label>
-    <input th:value="${post.title}" id="title" th:field="*{title}">
+    <input th:value="*{title}" id="title" th:field="*{title}">
     <br>
     <label for="body">Edit your body</label>
-    <input th:value="${post.body}" id="body" th:field="*{body}">
+    <input th:value="*{body}" id="body" th:field="*{body}">
     <button type="submit">Edit</button>
 </form>
+<p th:text="${post.user.username}"></p>
 </body>
 </html>

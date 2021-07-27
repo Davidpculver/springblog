@@ -116,7 +116,6 @@ public class PostController {
     public String showCreateForm(Model model) {
         model.addAttribute("post", new Post());
         return "posts/create";
-
     }
 
 
@@ -131,28 +130,45 @@ public class PostController {
     //    REFACTORING FOR FORM MODEL BINDING
     @PostMapping("/posts/create")
     public String createPost(@ModelAttribute Post post) {
-        User user1 = userDao.getById(1L);
-        post.setUser(user1);
+        post.setUser(userDao.getById(1L));
         postDao.save(post);
         return "redirect:/posts";
     }
 
 //    REFACTORING FOR FORM MODEL BINDING
 
+//    @GetMapping("/posts/{id}/edit")
+//    public String postToEdit(@PathVariable long id, Model model) {
+//        Post post = postDao.getById(id);
+//        System.out.println("user id: " + post.getUser().getId());
+//        model.addAttribute("post", post);
+//        model.addAttribute("id", id);
+//        return "posts/edit";
+//    }
+
+    //    INSTRUCTOR EXAMPLE
     @GetMapping("/posts/{id}/edit")
     public String postToEdit(@PathVariable long id, Model model) {
-        model.addAttribute("post", postDao.findById(id));
-        model.addAttribute("updatedPost", new Post());
+        Post post = postDao.getById(id);
+        model.addAttribute("post", post);
+        model.addAttribute("id", id);
         return "posts/edit";
     }
 
-//    Can't get edit update to work.
+//    Can't get edit update to work. deleting the user
+//    @PostMapping("/posts/edit/update/{id}")
+//    public String editPost(@PathVariable long id, @ModelAttribute Post post) {
+////        System.out.println("user id: " + post.getUser().getUsername());
+//        postDao.save(post);
+//        return "redirect:/posts";
+//    }
+
     @PostMapping("/posts/edit/update/{id}")
-    public String editPost(@ModelAttribute Post post) {
-//        Post updatedPost = postDao.getById(id);
+    public String editPost(@PathVariable long id, @ModelAttribute Post post) {
+//        System.out.println("user id: " + post.getUser().getUsername());
+        post.setUser(userDao.getById(1L));
         postDao.save(post);
         return "redirect:/posts";
     }
-
 
 }

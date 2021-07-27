@@ -11,7 +11,7 @@
     <th:block>
         <li th:text="${post.title}"></li>
         <li th:text="${post.body}"></li>
-        <li th:text="${post.user.email}"></li>
+<!--        <li th:text="${post.user.email}"></li>-->
 
 <!--        Create delete button: grabs the post id inside the mapping-->
         <form th:action="@{/posts/delete/{id}(id=${post.id})}" method="POST">
