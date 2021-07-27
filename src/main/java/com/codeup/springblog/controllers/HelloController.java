@@ -1,5 +1,6 @@
 package com.codeup.springblog.controllers;
 
+import com.codeup.springblog.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -7,6 +8,14 @@ import org.springframework.web.bind.annotation.*;
 // controller notifies spring (similar to servlet)
 @Controller
 public class HelloController {
+
+    private final EmailService emailSvc;
+
+//    injecting the email service so we can use it in our helloController
+    public HelloController(EmailService emailService){
+        this.emailSvc = emailService;
+    }
+
     @GetMapping("/hello")
 //    responsebody - out "doGet" method
     @ResponseBody
@@ -31,24 +40,33 @@ public class HelloController {
         return "hello";
     }
 
+//    @GetMapping("/join")
+//    public String showJoinForm(){
+//        return "join";
+//    }
+//
+////    Connected to join.html. Used pizza for names to clarify what is happening
+//    @PostMapping("/join")
+////    RequestParam references the name from the html form (join.html)..similar to request.getParameter()
+//    public String joinCohort(@RequestParam(name = "cohort") String cohort, Model model){
+//        model.addAttribute("pizza", "Welcome to " + cohort + "!");
+//        return "join";
+//    }
+
+//    REFACTOR to use emailService
     @GetMapping("/join")
     public String showJoinForm(){
         return "join";
     }
 
 
-
-//    Connected to join.html. Used pizza for names to clarify what is happening
     @PostMapping("/join")
-//    RequestParam references the name from the html form (join.html)..similar to request.getParameter()
     public String joinCohort(@RequestParam(name = "cohort") String cohort, Model model){
         model.addAttribute("pizza", "Welcome to " + cohort + "!");
+//        using prepareAndSend method from EmailService class
+        emailSvc.prepareAndSend("crdorito@hotmail.com", "Hello! This is the first email from " + cohort, "Thank you for attending the class.");
         return "join";
     }
-
-
-
-
 
     @GetMapping("/number/{num}")
     @ResponseBody

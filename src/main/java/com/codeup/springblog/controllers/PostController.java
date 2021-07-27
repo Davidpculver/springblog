@@ -4,6 +4,7 @@ import com.codeup.springblog.models.Post;
 import com.codeup.springblog.models.PostRepository;
 import com.codeup.springblog.models.User;
 import com.codeup.springblog.models.UserRepository;
+import com.codeup.springblog.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -65,10 +66,12 @@ public class PostController {
 
     private final PostRepository postDao;
     private final UserRepository userDao;
+    private final EmailService emailSvc;
 
-    public PostController(PostRepository postDao, UserRepository userDao) {
+    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailSvc) {
         this.postDao = postDao;
         this.userDao = userDao;
+        this.emailSvc = emailSvc;
     }
 
     @GetMapping("/posts")
@@ -131,6 +134,7 @@ public class PostController {
     @PostMapping("/posts/create")
     public String createPost(@ModelAttribute Post post) {
         post.setUser(userDao.getById(1L));
+        emailSvc.prepareAndSend(userDao.getById(1L).getEmail(), "New post", "Thank you for creating a new post!");
         postDao.save(post);
         return "redirect:/posts";
     }
@@ -163,10 +167,13 @@ public class PostController {
 //        return "redirect:/posts";
 //    }
 
+//    since we are using .save (or PUT to the db), have to set the user. unable to only update the title/body
+//    after commented line below, is the solution to grabbing the id of the user that posted
     @PostMapping("/posts/edit/update/{id}")
     public String editPost(@PathVariable long id, @ModelAttribute Post post) {
-//        System.out.println("user id: " + post.getUser().getUsername());
-        post.setUser(userDao.getById(1L));
+//        post.setUser(userDao.getById(1L));
+        User postUser = postDao.getById(post.getId()).getUser();
+        post.setUser(postUser);
         postDao.save(post);
         return "redirect:/posts";
     }
