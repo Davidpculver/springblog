@@ -8,17 +8,31 @@
 <body>
 <!--<nav th:replace="partials/navbar.html :: navbar"></nav>-->
 <!--<header th:include="partials/header.html :: header"></header>-->
-<form th:action="@{/posts/create}" method="post">
+<!--<form th:action="@{/posts/create}" method="post">-->
+<!--    <div class="form-group">-->
+<!--        <label for="title">Title</label>-->
+<!--        <input id="title" name="title" class="form-control" type="text">-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--        <label for="body">Body</label>-->
+<!--        <textarea id="body" name="body" class="form-control" type="text"></textarea>-->
+<!--    </div>-->
+<!--    <input type="submit" class="btn btn-block btn-primary">-->
+<!--</form>-->
+
+<!--REFACTORED WITH FORM MODEL BINDING-->
+<form th:action="@{/posts/create}" th:method="post" th:object="${post}">
     <div class="form-group">
         <label for="title">Title</label>
-        <input id="title" name="title" class="form-control" type="text">
+        <input id="title" th:field="*{title}" class="form-control" type="text">
     </div>
     <div class="form-group">
         <label for="body">Body</label>
-        <textarea id="body" name="body" class="form-control" type="text"></textarea>
+        <textarea id="body" th:field="*{body}" class="form-control" type="text"></textarea>
     </div>
     <input type="submit" class="btn btn-block btn-primary">
 </form>
+
 <!--<footer th:include="partials/footer.html :: footer"></footer>-->
 <!--<script th:include="partials/scripts.html :: scripts"></script>-->
 </body>
