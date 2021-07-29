@@ -98,6 +98,16 @@ public class User {
     public User() {
     }
 
+//    the copy constructor is used as alternative to cloning an object using the current values of another. "fulfil contract used in classes from security package"
+    public User(User copy){
+        id = copy.id;
+        username = copy.username;
+        email = copy.email;
+        password = copy.password;
+        ads = copy.ads;
+        posts = copy.posts;
+    }
+
     public User(long id, String username, String email, String password) {
         this.id = id;
         this.username = username;

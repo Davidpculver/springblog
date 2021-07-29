@@ -1,10 +1,11 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
-import com.codeup.springblog.models.PostRepository;
+import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.models.User;
-import com.codeup.springblog.models.UserRepository;
+import com.codeup.springblog.repositories.UserRepository;
 import com.codeup.springblog.services.EmailService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -80,9 +81,23 @@ public class PostController {
         return "posts/index";
     }
 
-    @GetMapping("/posts/{n}")
-    public String findById(@PathVariable long n, Model model) {
-        model.addAttribute("post", postDao.findById(n));
+//    @GetMapping("/posts/{id}")
+//    public String findById(@PathVariable long id, Model model) {
+//        model.addAttribute("post", postDao.findById(id));
+//        return "posts/show";
+//    }
+
+//    REFACTOR to use authentication; if the post user is logged in, then the delete/edit buttons should show. Otherwise, they see the post only
+    @GetMapping("/posts/{id}")
+    public String singlePost(@PathVariable long id, Model model) {
+        Post post = postDao.getById(id);
+        boolean isPostOwner = false;
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
+            User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            isPostOwner = currentUser.getId() == post.getUser().getId();
+        }
+        model.addAttribute("post", post);
+        model.addAttribute("isPostOwner", isPostOwner);
         return "posts/show";
     }
 
@@ -153,10 +168,17 @@ public class PostController {
     //    INSTRUCTOR EXAMPLE
     @GetMapping("/posts/{id}/edit")
     public String postToEdit(@PathVariable long id, Model model) {
+//        checks to see if the user is logged in and has authentication
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Post post = postDao.getById(id);
-        model.addAttribute("post", post);
-        model.addAttribute("id", id);
-        return "posts/edit";
+        if(currentUser.getId() == post.getUser().getId()){
+            model.addAttribute("post", post);
+            model.addAttribute("id", id);
+            return "posts/edit";
+        }
+        else {
+            return "redirect:/posts/" + id;
+        }
     }
 
 //    Can't get edit update to work. deleting the user
