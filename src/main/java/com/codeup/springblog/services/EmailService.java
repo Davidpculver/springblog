@@ -29,12 +29,12 @@ public class EmailService {
         msg.setSubject(subject);
         msg.setText(body);
 // Have to have try catch to check for errors in setup
-        try{
+        try {
             this.emailSender.send(msg);
-        }
-        catch (MailException ex) {
+        } catch (MailException ex) {
             // simply log it and go on...
             System.err.println(ex.getMessage());
         }
+
     }
 }
