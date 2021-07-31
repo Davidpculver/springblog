@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Show post</title>
+    <th:block th:replace="partials/styles.html :: styles"></th:block>
 </head>
 <body>
-
+<nav th:replace="partials/navbar.html :: navbar"></nav>
 <h1>Here is the single post</h1>
 <p><span th:text="${post.title}"></span></p>
 <p><span th:text="${post.body}"></span></p>
