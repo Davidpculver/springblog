@@ -146,10 +146,20 @@ public class PostController {
 //    }
 
     //    REFACTORING FOR FORM MODEL BINDING
+//    @PostMapping("/posts/create")
+//    public String createPost(@ModelAttribute Post post) {
+//        post.setUser(userDao.getById(1L));
+//        emailSvc.prepareAndSend(userDao.getById(1L).getEmail(), "New post", "Thank you for creating a new post!");
+//        postDao.save(post);
+//        return "redirect:/posts";
+//    }
+
+//    REFACTOR for using authentication and grabbing the user thats signed in
     @PostMapping("/posts/create")
     public String createPost(@ModelAttribute Post post) {
-        post.setUser(userDao.getById(1L));
-        emailSvc.prepareAndSend(userDao.getById(1L).getEmail(), "New post", "Thank you for creating a new post!");
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        post.setUser(user);
+//        emailSvc.prepareAndSend(userDao.getById(1L).getEmail(), "New post", "Thank you for creating a new post!");
         postDao.save(post);
         return "redirect:/posts";
     }
@@ -180,6 +190,19 @@ public class PostController {
             return "redirect:/posts/" + id;
         }
     }
+
+
+    @PostMapping("/posts/{id}/edit")
+    public String postToEdit(@PathVariable long id, @ModelAttribute Post post) {
+//        checks to see if the user is logged in and has authentication
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Post postFromDB = postDao.getById(id);
+        if(user.getId() == postFromDB.getUser().getId()){
+            post.setUser(user);
+            postDao.save(post);
+        }
+            return "redirect:/posts/" + id;
+        }
 
 //    Can't get edit update to work. deleting the user
 //    @PostMapping("/posts/edit/update/{id}")
