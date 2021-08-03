@@ -13,6 +13,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     Post findById(long id);
 
     void deleteById(long id);
+    Post findByTitle (String title);
 
 
 }

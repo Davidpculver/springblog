@@ -157,6 +157,7 @@ public class PostController {
 //    REFACTOR for using authentication and grabbing the user thats signed in
     @PostMapping("/posts/create")
     public String createPost(@ModelAttribute Post post) {
+//        Line below gets the user that is logged in using the prebuilt SecurityContextHolder class; sets it as a User object so we can use it.
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         post.setUser(user);
 //        emailSvc.prepareAndSend(userDao.getById(1L).getEmail(), "New post", "Thank you for creating a new post!");
