@@ -104,8 +104,6 @@ public class PostController {
     @PostMapping("/posts/delete/{id}")
     public String deleteById(@PathVariable long id) {
         postDao.deleteById(id);
-//        Instructor:
-//        postRepo.delete(id);
         return "redirect:/posts";
     }
 
