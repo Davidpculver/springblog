@@ -13,11 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class PostController {
 
-//    @GetMapping("/posts")
-//    @ResponseBody
-//    public String postIndexPage(){
-//        return "<h1>This is the posts index page</h1>";
-//    }
+
 //
 //    @GetMapping("/posts/{id}")
 //    @ResponseBody
