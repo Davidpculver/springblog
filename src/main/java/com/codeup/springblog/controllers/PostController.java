@@ -15,12 +15,6 @@ public class PostController {
 
 
 //
-//    @GetMapping("/posts/{id}")
-//    @ResponseBody
-//    public String viewIndividualPosts(@PathVariable long id){
-//        return "<h1>This shows an individual post with id of </h1>" + id;
-//    }
-//
 ////    When you visit you will see form to create post
 //    @GetMapping("/posts/create")
 //    @ResponseBody
