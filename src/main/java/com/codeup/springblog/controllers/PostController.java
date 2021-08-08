@@ -14,13 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
 
 
-//
-////    When you visit you will see form to create post
-//    @GetMapping("/posts/create")
-//    @ResponseBody
-//    public String createPostForm(){
-//        return "<h1>This is the create a new post form</h1>";
-//    }
+
 //
 //    @PostMapping("/posts/create")
 //    @ResponseBody
