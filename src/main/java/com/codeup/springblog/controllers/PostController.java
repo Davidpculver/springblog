@@ -15,12 +15,7 @@ public class PostController {
 
 
 
-//
-//    @PostMapping("/posts/create")
-//    @ResponseBody
-//    public String createNewPost(){
-//        return "<h1>This is the create new post page</h1>";
-//    }
+
 
 
 //    List<Post> posts = new ArrayList<>();
