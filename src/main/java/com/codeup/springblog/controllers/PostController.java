@@ -14,26 +14,6 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
 
 
-
-
-
-
-//    List<Post> posts = new ArrayList<>();
-//
-//
-//    @GetMapping("/index")
-//    public String showPosts(Model model) {
-//        Post post1 = new Post("Post 1", "This is the first post.");
-//        Post post2 = new Post("Post 2", "This is the second post.");
-//
-//
-//        posts.add(post1);
-//        posts.add(post2);
-//
-//        model.addAttribute("posts", posts);
-//
-//        return "posts/index";
-//    }
 //
 //
 //    //        For individual post
