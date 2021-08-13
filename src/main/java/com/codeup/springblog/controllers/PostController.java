@@ -14,15 +14,6 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
 
 
-//
-//
-//    //        For individual post
-//    @GetMapping("/posts/{id}")
-//    public String viewIndividualPosts(@PathVariable long id, Model model) {
-//        Post post = new Post("Mailman bites dog", "Dog is suing the city for treats.");
-//        model.addAttribute("post", post);
-//        return "posts/show";
-//    }
 
     private final PostRepository postDao;
     private final UserRepository userDao;
