@@ -85,13 +85,7 @@ public class PostController {
     }
 
 
-//    @PostMapping("/posts/create")
-//    public String createPost(@RequestParam String title, @RequestParam String body) {
-//        User user1 = userDao.getById(1L);
-//        Post post = new Post(title, body, user1);
-//        postRepo.save(post);
-//        return "redirect:/posts";
-//    }
+
 
     //    REFACTORING FOR FORM MODEL BINDING
 //    @PostMapping("/posts/create")
