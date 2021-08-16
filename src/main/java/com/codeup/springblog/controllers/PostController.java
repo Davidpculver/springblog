@@ -87,15 +87,6 @@ public class PostController {
 
 
 
-    //    REFACTORING FOR FORM MODEL BINDING
-//    @PostMapping("/posts/create")
-//    public String createPost(@ModelAttribute Post post) {
-//        post.setUser(userDao.getById(1L));
-//        emailSvc.prepareAndSend(userDao.getById(1L).getEmail(), "New post", "Thank you for creating a new post!");
-//        postDao.save(post);
-//        return "redirect:/posts";
-//    }
-
 //    REFACTOR for using authentication and grabbing the user thats signed in
     @PostMapping("/posts/create")
     public String createPost(@ModelAttribute Post post) {
