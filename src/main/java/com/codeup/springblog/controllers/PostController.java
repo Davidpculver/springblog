@@ -72,10 +72,7 @@ public class PostController {
 //        return "redirect:/posts";
 //    }
 
-//    @GetMapping("/posts/create")
-//    public String showCreateForm() {
-//        return "posts/create";
-//    }
+
 
     //    REFACTORING FOR FORM MODEL BINDING
     @GetMapping("/posts/create")
