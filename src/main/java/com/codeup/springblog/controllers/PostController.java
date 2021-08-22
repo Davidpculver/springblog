@@ -135,13 +135,7 @@ public class PostController {
             return "redirect:/posts/" + id;
         }
 
-//    Can't get edit update to work. deleting the user
-//    @PostMapping("/posts/edit/update/{id}")
-//    public String editPost(@PathVariable long id, @ModelAttribute Post post) {
-////        System.out.println("user id: " + post.getUser().getUsername());
-//        postDao.save(post);
-//        return "redirect:/posts";
-//    }
+
 
 //    since we are using .save (or PUT to the db), have to set the user. unable to only update the title/body
 //    after commented line below, is the solution to grabbing the id of the user that posted
